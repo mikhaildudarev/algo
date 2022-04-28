@@ -1,6 +1,6 @@
 //  Created by Mikhail Dudarev on 28.04.2022.
 
-protocol DisjointSet {
+protocol DisjointSetProtocol {
     
     associatedtype Element
     
@@ -17,6 +17,8 @@ protocol DisjointSet {
     mutating func union(_ element1: Element, _ element2: Element) throws -> Bool
     
 }
+
+enum DisjointSet {}
 
 enum DisjointSetError: Error {
     case elementNotFound(_ element: Any)
