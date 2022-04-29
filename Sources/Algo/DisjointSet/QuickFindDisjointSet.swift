@@ -31,7 +31,7 @@ public extension DisjointSet {
         }
         
         /// - Complexity: O(N)
-        public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
+        @discardableResult public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let parentIndex1 = try find(element1)
             let parentIndex2 = try find(element2)
             guard parentIndex1 != parentIndex2 else {
