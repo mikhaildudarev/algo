@@ -19,7 +19,7 @@ public extension DisjointSet {
             ranks = elements.map { _ in Int.zero }
         }
         
-        /// - Complexity: O(N)
+        /// - Complexity: O(log N)
         public func find(_ element: Element) throws -> Int {
             guard var index = nodeIndices[element] else {
                 throw DisjointSet.Failure.elementNotFound(element)
