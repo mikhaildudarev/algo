@@ -18,7 +18,14 @@ public protocol DisjointSetProtocol {
     
 }
 
-public enum DisjointSet {}
+public enum DisjointSet {
+        
+    struct Node<Element> {
+        let element: Element
+        var parentIndex: Int
+    }
+    
+}
 
 public extension DisjointSet {
     

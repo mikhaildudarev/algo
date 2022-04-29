@@ -4,7 +4,7 @@ public extension DisjointSet {
     
     struct QuickFind<Element: Hashable>: DisjointSetProtocol {
         
-        private(set) var nodes = [Node]()
+        private(set) var nodes = [Node<Element>]()
         private(set) var nodeIndices = [Element: Int]()
         
         /// - Complexity: O(N)
@@ -46,15 +46,6 @@ public extension DisjointSet {
             return true
         }
         
-    }
-    
-}
-
-extension DisjointSet.QuickFind {
-    
-    struct Node {
-        let element: Element
-        var parentIndex: Int
     }
     
 }

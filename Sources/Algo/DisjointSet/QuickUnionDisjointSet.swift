@@ -4,7 +4,7 @@ public extension DisjointSet {
     
     struct QuickUnion<Element: Hashable>: DisjointSetProtocol {
         
-        private(set) var nodes = [Node]()
+        private(set) var nodes = [Node<Element>]()
         private(set) var nodeIndices = [Element: Int]()
         
         /// - Complexity: O(N)
@@ -37,24 +37,15 @@ public extension DisjointSet {
         
         /// - Complexity: O(N)
         public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
-            let parentIndex1 = try find(element1)
-            let parentIndex2 = try find(element2)
-            guard parentIndex1 != parentIndex2 else {
+            let rootIndex1 = try find(element1)
+            let rootIndex2 = try find(element2)
+            guard rootIndex1 != rootIndex2 else {
                 return false
             }
-            nodes[parentIndex1].parentIndex = parentIndex2
+            nodes[rootIndex1].parentIndex = rootIndex2
             return true
         }
         
-    }
-    
-}
-
-extension DisjointSet.QuickUnion {
-    
-    struct Node {
-        let element: Element
-        var parentIndex: Int
     }
     
 }
