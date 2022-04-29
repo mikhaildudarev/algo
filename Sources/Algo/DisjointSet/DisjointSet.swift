@@ -1,6 +1,6 @@
 //  Created by Mikhail Dudarev on 28.04.2022.
 
-protocol DisjointSetProtocol {
+public protocol DisjointSetProtocol {
     
     associatedtype Element
     
@@ -18,8 +18,12 @@ protocol DisjointSetProtocol {
     
 }
 
-enum DisjointSet {}
+public enum DisjointSet {}
 
-enum DisjointSetError: Error {
-    case elementNotFound(_ element: Any)
+public extension DisjointSet {
+    
+    enum Failure: Error {
+        case elementNotFound(_ element: Any)
+    }
+    
 }
