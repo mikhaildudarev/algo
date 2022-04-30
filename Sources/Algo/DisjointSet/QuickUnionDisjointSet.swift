@@ -17,17 +17,16 @@ public extension DisjointSet {
             }
         }
         
-        /// - Complexity: O(N)
+        /// - Complexity: O(log N)
         public func find(_ element: Element) throws -> Int {
-            guard var index = nodeIndices[element] else {
+            guard let index = nodeIndices[element] else {
                 throw DisjointSet.Failure.elementNotFound(element)
             }
-            var node = nodes[index]
-            while node.parentIndex != index {
-                index = node.parentIndex
-                node = nodes[index]
+            guard nodes[index].parentIndex != index else {
+                return index
             }
-            return index
+            nodes[index].parentIndex = try find(nodes[nodes[index].parentIndex].element) // path compression optimization
+            return nodes[index].parentIndex
         }
         
         /// - Complexity: O(N)
