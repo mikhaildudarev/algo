@@ -29,12 +29,12 @@ public extension DisjointSet {
             return nodes[index].parentIndex
         }
         
-        /// - Complexity: O(N)
+        /// - Complexity: O(log N)
         public func connected(_ element1: Element, _ element2: Element) throws -> Bool {
             try find(element1) == find(element2)
         }
         
-        /// - Complexity: O(N)
+        /// - Complexity: O(log N)
         @discardableResult public func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let rootIndex1 = try find(element1)
             let rootIndex2 = try find(element2)
