@@ -2,13 +2,13 @@
 
 public extension DisjointSet {
     
-    struct QuickUnion<Element: Hashable>: DisjointSetProtocol {
+    final class QuickUnion<Element: Hashable>: DisjointSetProtocol {
         
         private(set) var nodes = [Node<Element>]()
         private(set) var nodeIndices = [Element: Int]()
         
         /// - Complexity: O(N)
-        public init(_ elements: [Element]) {
+        required public init(_ elements: [Element]) {
             nodes.reserveCapacity(elements.count)
             
             for (index, element) in elements.enumerated() {
@@ -36,7 +36,7 @@ public extension DisjointSet {
         }
         
         /// - Complexity: O(N)
-        @discardableResult public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
+        @discardableResult public func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let rootIndex1 = try find(element1)
             let rootIndex2 = try find(element2)
             guard rootIndex1 != rootIndex2 else {

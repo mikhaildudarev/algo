@@ -2,7 +2,7 @@
 
 public extension DisjointSet {
     
-    struct QuickFind<Element: Hashable>: DisjointSetProtocol {
+    final class QuickFind<Element: Hashable>: DisjointSetProtocol {
         
         private(set) var nodes = [Node<Element>]()
         private(set) var nodeIndices = [Element: Int]()
@@ -31,7 +31,7 @@ public extension DisjointSet {
         }
         
         /// - Complexity: O(N)
-        @discardableResult public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
+        @discardableResult public func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let parentIndex1 = try find(element1)
             let parentIndex2 = try find(element2)
             guard parentIndex1 != parentIndex2 else {

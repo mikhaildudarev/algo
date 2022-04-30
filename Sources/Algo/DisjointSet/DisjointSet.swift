@@ -14,7 +14,7 @@ public protocol DisjointSetProtocol {
     func connected(_ element1: Element, _ element2: Element) throws -> Bool
     
     /// Connects two given elements. Returns `false` if they are already connected.
-    @discardableResult mutating func union(_ element1: Element, _ element2: Element) throws -> Bool
+    @discardableResult func union(_ element1: Element, _ element2: Element) throws -> Bool
     
 }
 

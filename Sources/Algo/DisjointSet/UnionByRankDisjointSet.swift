@@ -2,11 +2,11 @@
 
 public extension DisjointSet {
     
-    struct UnionByRank<Element: Hashable>: DisjointSetProtocol {
+    final class UnionByRank<Element: Hashable>: DisjointSetProtocol {
         
         private(set) var nodes = [Node<Element>]()
         private(set) var nodeIndices = [Element: Int]()
-        private var ranks: [Int]
+        private(set) var ranks: [Int]
         
         /// - Complexity: O(N)
         public init(_ elements: [Element]) {
@@ -38,7 +38,7 @@ public extension DisjointSet {
         }
         
         /// - Complexity: O(log N)
-        @discardableResult public mutating func union(_ element1: Element, _ element2: Element) throws -> Bool {
+        @discardableResult public func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let rootIndex1 = try find(element1)
             let rootIndex2 = try find(element2)
             guard rootIndex1 != rootIndex2 else {
@@ -52,12 +52,12 @@ public extension DisjointSet {
                 connectNode(at: rootIndex1, to: rootIndex2)
                 ranks[rootIndex2] += 1
             }
-            
             return true
         }
         
+        /// Connects nodes at given indices, so that the node at index 1 becomes child of the node at index 2.
         /// - Complexity: O(1)
-        private mutating func connectNode(at index1: Int, to index2: Int) {
+        private func connectNode(at index1: Int, to index2: Int) {
             nodes[index1].parentIndex = index2
         }
         
