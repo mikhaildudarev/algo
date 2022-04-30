@@ -43,14 +43,17 @@ public extension DisjointSet {
             guard rootIndex1 != rootIndex2 else {
                 return false
             }
+            
+            // connect shorter tree to the taller one, unless they have equal height
             if ranks[rootIndex1] > ranks[rootIndex2] {
-                connectNode(at: rootIndex1, to: rootIndex2)
-            } else if ranks[rootIndex1] < ranks[rootIndex2] {
                 connectNode(at: rootIndex2, to: rootIndex1)
+            } else if ranks[rootIndex1] < ranks[rootIndex2] {
+                connectNode(at: rootIndex1, to: rootIndex2)
             } else {
                 connectNode(at: rootIndex1, to: rootIndex2)
                 ranks[rootIndex2] += 1
             }
+            
             return true
         }
         
