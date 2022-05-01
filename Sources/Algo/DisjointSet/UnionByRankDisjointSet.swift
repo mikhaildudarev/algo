@@ -16,10 +16,10 @@ public extension DisjointSet {
                 nodes.append(Node(element: element, parentIndex: index))
             }
             
-            ranks = elements.map { _ in Int.zero }
+            ranks = [Int](repeating: 1, count: elements.count)
         }
         
-        /// - Complexity: O(log N)
+        /// - Complexity: `O(α(N))`, where `α` refers to the Inverse Ackermann function
         public func find(_ element: Element) throws -> Int {
             guard let index = nodeIndices[element] else {
                 throw DisjointSet.Failure.elementNotFound(element)
@@ -31,12 +31,12 @@ public extension DisjointSet {
             return nodes[index].parentIndex
         }
         
-        /// - Complexity: O(log N)
+        /// - Complexity: `O(α(N))`, where `α` refers to the Inverse Ackermann function
         public func connected(_ element1: Element, _ element2: Element) throws -> Bool {
             try find(element1) == find(element2)
         }
         
-        /// - Complexity: O(log N)
+        /// - Complexity: `O(α(N))`, where `α` refers to the Inverse Ackermann function
         @discardableResult public func union(_ element1: Element, _ element2: Element) throws -> Bool {
             let rootIndex1 = try find(element1)
             let rootIndex2 = try find(element2)

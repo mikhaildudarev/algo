@@ -1,5 +1,9 @@
 //  Created by Mikhail Dudarev on 28.04.2022.
 
+/**
+ https://en.wikipedia.org/wiki/Disjoint-set_data_structure
+ */
+
 public protocol DisjointSetProtocol {
     
     associatedtype Element
