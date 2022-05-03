@@ -9,10 +9,10 @@ public protocol QueueProtocol: Sequence {
     associatedtype Element
     
     /// Adds an element to the top of the stack
-    func push(_ element: Element)
+    func enqueue(_ element: Element)
     
     /// Removes and returns an element from the top of the stack (if any)
-    @discardableResult func pop() -> Element?
+    @discardableResult func dequeue() -> Element?
     
     /// Returns an element from the top of the stack (if any)
     func peek() -> Element?
@@ -52,7 +52,7 @@ public struct QueueIterator<Queue: QueueProtocol>: IteratorProtocol {
     }
     
     public mutating func next() -> Queue.Element? {
-        queue.pop()
+        queue.dequeue()
     }
     
 }

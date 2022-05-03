@@ -8,7 +8,7 @@ public extension Queue {
         private(set) var tail: Node<Element>?
         
         /// - Complexity: O(1)
-        public func push(_ element: Element) {
+        public func enqueue(_ element: Element) {
             let node = Node(element: element)
             guard head != nil else {
                 head = node
@@ -20,7 +20,7 @@ public extension Queue {
         }
         
         /// - Complexity: O(1)
-        @discardableResult public func pop() -> Element? {
+        @discardableResult public func dequeue() -> Element? {
             guard let head = head else {
                 return nil
             }
