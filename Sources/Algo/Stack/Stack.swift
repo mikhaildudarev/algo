@@ -1,6 +1,6 @@
 //  Created by Mikhail Dudarev on 03.05.2022.
 
-public protocol StackProtocol {
+public protocol StackProtocol: Sequence {
     
     associatedtype Element
     
@@ -27,6 +27,28 @@ extension Stack {
             self.element = element
             self.next = next
         }
+    }
+    
+}
+
+extension StackProtocol {
+
+    public func makeIterator() -> StackIterator<Self> {
+        StackIterator(self)
+    }
+
+}
+
+public struct StackIterator<Stack: StackProtocol>: IteratorProtocol {
+    
+    private let stack: Stack
+    
+    init(_ stack: Stack) {
+        self.stack = stack
+    }
+    
+    public mutating func next() -> Stack.Element? {
+        stack.pop()
     }
     
 }
