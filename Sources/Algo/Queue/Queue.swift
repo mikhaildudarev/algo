@@ -4,7 +4,7 @@
  https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
  */
 
-public protocol QueueProtocol {
+public protocol QueueProtocol: Sequence {
     
     associatedtype Element
     
@@ -31,6 +31,28 @@ extension Queue {
             self.element = element
             self.next = next
         }
+    }
+    
+}
+
+extension QueueProtocol {
+
+    public func makeIterator() -> QueueIterator<Self> {
+        QueueIterator(self)
+    }
+
+}
+
+public struct QueueIterator<Queue: QueueProtocol>: IteratorProtocol {
+    
+    private let queue: Queue
+    
+    init(_ queue: Queue) {
+        self.queue = queue
+    }
+    
+    public mutating func next() -> Queue.Element? {
+        queue.pop()
     }
     
 }
