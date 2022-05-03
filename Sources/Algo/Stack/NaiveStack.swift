@@ -4,23 +4,23 @@ public extension Stack {
     
     final class Naive<Element>: StackProtocol {
         
-        private(set) var top: Node<Element>?
+        private(set) var head: Node<Element>?
         
         /// - Complexity: O(1)
         public func push(_ element: Element) {
-            top = Node(element: element, next: top)
+            head = Node(element: element, next: head)
         }
         
         /// - Complexity: O(1)
         @discardableResult public func pop() -> Element? {
-            let top = self.top
-            self.top = top?.next
-            return top?.element
+            let head = self.head
+            self.head = head?.next
+            return head?.element
         }
         
         /// - Complexity: O(1)
         public func peek() -> Element? {
-            top?.element
+            head?.element
         }
         
     }
