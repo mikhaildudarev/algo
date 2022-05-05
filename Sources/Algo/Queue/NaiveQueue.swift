@@ -7,6 +7,8 @@ public extension Queue {
         private(set) var head: Node<Element>?
         private(set) var tail: Node<Element>?
         
+        public init() {}
+        
         /// - Complexity: O(1)
         public func enqueue(_ element: Element) {
             let node = Node(element: element)

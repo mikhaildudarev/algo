@@ -6,6 +6,8 @@ public extension Stack {
         
         private(set) var head: Node<Element>?
         
+        public init() {}
+        
         /// - Complexity: O(1)
         public func push(_ element: Element) {
             head = Node(element: element, next: head)
