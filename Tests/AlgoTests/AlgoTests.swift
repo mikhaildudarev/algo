@@ -1,4 +1,4 @@
 import XCTest
-@testable import Algo
+import Algo
 
-final class AlgoTests: XCTestCase {}
+class AlgoTests: XCTestCase {}
