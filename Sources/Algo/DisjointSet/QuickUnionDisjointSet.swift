@@ -4,11 +4,14 @@ public extension DisjointSet {
     
     final class QuickUnion<Element: Hashable>: DisjointSetProtocol {
         
+        public let elements: [Element]
         private(set) var nodes = [Node<Element>]()
-        private(set) var nodeIndices = [Element: Int]()
+        private(set) var nodeIndices = [Element: Int]()        
         
         /// - Complexity: O(N)
         required public init(_ elements: [Element]) {
+            self.elements = elements
+            
             nodes.reserveCapacity(elements.count)
             
             for (index, element) in elements.enumerated() {

@@ -4,9 +4,11 @@
  https://en.wikipedia.org/wiki/Disjoint-set_data_structure
  */
 
-public protocol DisjointSetProtocol {
+public protocol DisjointSetProtocol: Sequence {
     
     associatedtype Element
+    
+    var elements: [Element] { get }
     
     /// Creates a new set for the given elements. Each element belongs to its own group.
     init(_ elements: [Element])
@@ -27,6 +29,14 @@ public enum DisjointSet {
     struct Node<Element> {
         let element: Element
         var parentIndex: Int
+    }
+    
+}
+
+extension DisjointSetProtocol {
+    
+    public func makeIterator() -> IndexingIterator<[Element]> {
+        elements.makeIterator()
     }
     
 }
