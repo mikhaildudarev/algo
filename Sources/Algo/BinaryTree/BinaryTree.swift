@@ -26,12 +26,56 @@ public final class BinaryTree<Element> {
     public init(root: Node?) {
         self.root = root
     }
+    
+    public init(levelOrderedArray: [Element?]) throws {
+        guard let firstElement = levelOrderedArray.first else {
+            self.root = nil
+            return
+        }
+        
+        guard let firstElement = firstElement else {
+            throw Failure.cannotBuildTreeFromLevelOrderedArray(levelOrderedArray)
+        }
+        
+        let elementsQueue = Queue.Naive<Element?>()
+        for element in levelOrderedArray.dropFirst() {
+            elementsQueue.enqueue(element)
+        }
+        
+        let nodesQueue = Queue.Naive<Node>()
+        let root = Node(value: firstElement)
+        nodesQueue.enqueue(root)
+        
+        while elementsQueue.peek() != nil {
+            let node = nodesQueue.dequeue()
+            if let leftElement = elementsQueue.dequeue(), let leftElement = leftElement {
+                let leftNode = Node(value: leftElement)
+                node?.left = leftNode
+                nodesQueue.enqueue(leftNode)
+            }
+            if let rightElement = elementsQueue.dequeue(), let rightElement = rightElement {
+                let rightNode = Node(value: rightElement)
+                node?.right = rightNode
+                nodesQueue.enqueue(rightNode)
+            }
+        }
+        
+        self.root = root
+    }
 }
 
 extension BinaryTree: Sequence {
 
     public func makeIterator() -> Iterator {
         Iterator(type: iteratorType, root: root)
+    }
+    
+}
+
+public extension BinaryTree {
+        
+    enum Failure: Error {
+        case cannotBuildTreeFromLevelOrderedArray(_ array: [Element?])
     }
     
 }

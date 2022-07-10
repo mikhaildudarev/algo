@@ -5,6 +5,15 @@ import XCTest
 
 final class BinaryTreeTests: AlgoTests {
     
+    func testInitFromArray() {
+        let tree = try! BinaryTree(levelOrderedArray: [1, nil, 3, 4, 5])
+        XCTAssertEqual(tree.root?.value, 1)
+        XCTAssertNil(tree.root?.left)
+        XCTAssertEqual(tree.root?.right?.value, 3)
+        XCTAssertEqual(tree.root?.right?.left?.value, 4)
+        XCTAssertEqual(tree.root?.right?.right?.value, 5)
+    }
+    
     func testSingleNode() {
         let node = BinaryTree.Node(value: 5)
         let tree = BinaryTree(root: node)
