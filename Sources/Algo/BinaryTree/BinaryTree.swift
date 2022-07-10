@@ -20,14 +20,20 @@ public final class BinaryTree<Element> {
         
     }
     
-    public var iteratorType: Iterator.TraversalType = .preOrder
+    public var iteratorType: Iterator.TraversalType
     public let root: Node?
     
-    public init(root: Node?) {
+    public init(root: Node?, iteratorType: Iterator.TraversalType = .preOrder) {
         self.root = root
+        self.iteratorType = iteratorType
     }
     
-    public init(levelOrderedArray: [Element?]) throws {
+    public init(
+        levelOrderedArray: [Element?],
+        iteratorType: Iterator.TraversalType = .preOrder
+    ) throws {
+        self.iteratorType = iteratorType
+        
         guard let firstElement = levelOrderedArray.first else {
             self.root = nil
             return
