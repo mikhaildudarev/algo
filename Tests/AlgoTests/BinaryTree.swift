@@ -59,7 +59,7 @@ final class BinaryTreeTests: AlgoTests {
         XCTAssertEqual(tree.map { $0.value }, [3, 2, 1])
     }
     
-    func testLevelOrderTraversal() {
+    func testLevelOrderTraversal1() {
         let root = BinaryTree.Node(value: 3)
         var node: BinaryTree.Node? = root
         node?.left = BinaryTree.Node(value: 9)
@@ -71,6 +71,26 @@ final class BinaryTreeTests: AlgoTests {
         let tree = BinaryTree(root: root)
         tree.iteratorType = .levelOrder
         XCTAssertEqual(tree.map { $0.value }, [3, 9, 20, 15, 7])
+    }
+    
+    func testLevelOrderTraversal2() {
+        let root = BinaryTree.Node(value: 4)
+        
+        var node: BinaryTree.Node? = root
+        node?.left = BinaryTree.Node(value: 7)
+        node?.right = BinaryTree.Node(value: 2)
+        
+        node = root.left
+        node?.left = BinaryTree.Node(value: 9)
+        node?.right = BinaryTree.Node(value: 6)
+        
+        node = root.right
+        node?.left = BinaryTree.Node(value: 3)
+        node?.right = BinaryTree.Node(value: 1)
+        
+        let tree = BinaryTree(root: root)
+        tree.iteratorType = .levelOrder
+        XCTAssertEqual(tree.map { $0.value }, [4, 7, 2, 9, 6, 3, 1])
     }
     
 }
